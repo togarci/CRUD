@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <title>CRUD - Vendas</title> {% endblock %}
+{% block link %} <link rel="stylesheet" href="{% static 'CSS/vendas.css' %}"> {% endblock %}
+
+{% block content %}
+<!-- Botao de add -->
+<div class="add flex" onclick="window.location.href = '/vendas/novo'"> 
+    <i class="fas fa-poll"></i> 
+    <i class="fas fa-plus"></i>
+    <p class="word">Nova Venda</p>
+</div>
+
+<!-- Pesquisa -->
+<div class="search">
+    <input type="text" placeholder="Venda">
+    <i class="fas fa-search"></i>
+</div>
+
+<!-- Vendas -->
+<div class="legenda flex">
+    <p class="word">Codigo da venda</p>
+    <p class="word">Cliente</p>
+    <p class="word"></p>
+</div>
+<div class="container-vendas">
+    <ul>
+        <li onclick="alert('feijoada')">
+            <h4 class="word">1234</h4>
+            <p class="word">Thyago Odorico Garcia</p>
+            <div class="icons">
+                <i onclick='alert("teste")' class="fas fa-trash"></i>
+                <i class="fas fa-angle-right"></i>
+            </div>
+        </li>
+        <li>
+            <h4 class="word">1234</h4>
+            <p class="word">Thyago Odorico Garcia</p>
+            <div class="icons">
+                <i class="fas fa-trash"></i>
+                <i class="fas fa-angle-right"></i>
+            </div>
+        </li>
+        <li>
+            <h4 class="word">1234</h4>
+            <p class="word">Thyago Odorico Garcia</p>
+            <div class="icons">
+                <i class="fas fa-trash"></i>
+                <i class="fas fa-angle-right"></i>
+            </div>
+        </li>
+        <li>
+            <h4 class="word">1234</h4>
+            <p class="word">Thyago Odorico Garcia</p>
+            <div class="icons">
+                <i class="fas fa-trash"></i>
+                <i class="fas fa-angle-right"></i>
+            </div>
+        </li>
+        <li>
+            <h4 class="word">1234</h4>
+            <p class="word">Thyago Odorico Garcia</p>
+            <div class="icons">
+                <i class="fas fa-trash"></i>
+                <i class="fas fa-angle-right"></i>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<!-- <div class="screen-modal">
+    <div class="modal">
+
+    </div>
+</div> -->
+{% endblock %}

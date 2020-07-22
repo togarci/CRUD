@@ -1,0 +1,161 @@
+/* Regras Gerais */
+.section{
+    width: 100%;
+    height: calc(100vh - 60px);
+    justify-content: space-around;
+}
+
+
+/* Infos */
+#main{
+    width: 750px;
+    max-width: 750px;
+    overflow-x: hidden;
+}
+/* indicador de janela */
+#steps{
+    margin: 30px auto 20px auto;
+    justify-content: center;
+    
+}
+.ball{
+    margin: 10px;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    background-color: #C4C4C4;
+}
+
+/* Carrousel dos dados */
+.container-dados{
+    transition: transform 0.4s ease-in-out;
+    
+}
+.dados{
+    min-width: 750px;
+    background-color: white;
+    height: 470px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+/* Add Cliente */
+.search{
+    position: relative;
+    width: 70%;
+    background-color: #D8D5D5;
+    margin-top: 30px;
+    height: 30px;
+    border-radius: 8px;
+    
+}
+.search input{
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    color: #010B13;
+    text-indent: 10px;
+    font-size: 12pt;
+    
+}
+.search input::placeholder{
+    color: gray;
+}
+.fa-search{
+    position: absolute;  
+    top: 7px;
+    right: 10px;
+    cursor: pointer;
+    color: #1B89EE;
+}
+.busca{
+    width: 100%;
+    overflow-y: auto;
+    max-height: 300px;
+    min-height: 300px;
+    margin: 10px 0px 20px 0px;
+}
+.model-dado{
+    display: grid;
+    grid-template-columns: 10% 50% 20% 20%;
+    height: 30px;
+    width: 400px;
+    align-items: center;
+    background-color: #EFEFEF;
+    border-radius: 15px;
+    margin: 25px auto 0px auto;
+    padding: 0px 20px 0px 20px;
+    cursor: pointer;
+}
+.model-dado label{
+    display: flex;
+}
+.model-dado input{
+    border: none;
+    width: 40px;
+}
+.model-dado .word{
+    font-size: 11pt;
+}
+
+/* botoes */
+.buttons{
+    margin-top: 20px;
+    width: 65%;
+    justify-content: space-between;
+    
+}
+.buttons button{
+    width: 140px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.back{
+    color: #1B89EE;
+    border: 2px solid #1B89EE;
+    background-color: white;
+}
+.next{
+    border: none;
+    background-color: #1B89EE;
+    color: white;
+
+}
+
+
+/* resumo */
+.resumo{
+    width: 350px;
+    height: 100%;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 0px 10px gray;
+    transition: transform 0.4s ease-in-out;
+}
+.tt_resumo{
+    margin-top: 30px;
+    width: 70%;
+    text-align: start;
+}
+.model-text{
+    height: 30px;
+    width: calc(70% - 20px);
+    padding: 0px 10px 0px 10px;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+}
+.model-text p{
+    font-size: 11pt;
+}
+.resumo .fa-user{
+    margin-right: 20px;
+}
+.fa-edit{
+    cursor: pointer;
+}

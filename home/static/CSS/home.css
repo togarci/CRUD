@@ -1,0 +1,139 @@
+/* Botoes de cadastro */
+.add-div{
+    margin-top: 70px ;
+    justify-content: space-evenly;
+}
+.add{
+    width: 23vw;
+    height: 260px;
+    border-radius: 31px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    transition: 0.4s;
+}
+.add:nth-of-type(1){
+    background-color: #1B89EE;
+}
+.add:nth-of-type(1):hover{
+    background-color: white;
+    color: #1B89EE;
+}
+.add:nth-of-type(2){
+    background-color: #47B036;
+}
+.add:nth-of-type(2):hover{
+    background-color: white;
+    color: #47B036;
+}
+.add:nth-of-type(3){
+    background-color: #D8B813;
+}
+.add:nth-of-type(3):hover{
+    background-color: white;
+    color: #D8B813;
+}
+
+
+
+.add div{
+    align-items: center;
+}
+
+.add > i{
+    font-size: 130px;
+    margin-bottom: 20px;
+}
+.add .fa-plus{
+    font-size: 30px;
+    margin: 5px;
+
+}
+
+
+
+
+/* Pesquisa */
+.line{
+    margin: 80px auto 50px auto ;
+    height: 1px;
+    width: 70%;
+    background-color: darkgray;
+}
+.container-search{
+    width: 70%;
+    margin: 0px auto 0px auto;
+    justify-content: space-between;
+}
+.search{
+    position: relative;
+    width: 75%;
+    background-color: #D8D5D5;
+    height: 35px;
+    border-radius: 8px;
+    
+}
+.search input{
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    color: #010B13;
+    text-indent: 10px;
+    font-size: 12pt;
+    
+}
+.search input::placeholder{
+    color: #010B13;
+}
+.fa-search{
+    position: absolute;  
+    top: 9px;
+    right: 10px;
+    cursor: pointer;
+    color: #1B89EE;
+}
+
+/* Filtro */
+#filter{
+    border: none;
+    background-color: #D8D5D5;
+    border-radius: 7px;
+    width: 20%;
+    height: 35px;
+    font-size: 12pt;
+    text-indent: 10px;
+}
+
+
+
+
+
+/* dados carregados */
+
+#dados{
+    
+    
+    width: 70%;
+    margin: 30px auto 30px auto;
+}
+#dados li{
+    width: calc(100% - 40px);
+    height: 40px;
+    padding: 0px 20px 0px 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+}
+#dados li:hover{
+    background-color: whitesmoke;
+    color: #1B89EE;
+    transition: 0.5s;
+}
+
+

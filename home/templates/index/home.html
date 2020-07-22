@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %} <link rel="stylesheet" href="{% static 'CSS/home.css' %}"> {% endblock %}
+{% block title %} <title>Crud - Home</title> {% endblock %}
+{% block content%}
+    <div class="add-div flex">
+        <div class="add column" onclick="window.location.href = '/cadastro'">
+            <i class="fas fa-user-friends"></i>
+            <div class="flex">
+                <i class="fas fa-plus"></i>
+                <b class="word">Cadastrar Usuário</b>
+            </div>
+        </div>
+        <div onclick="window.location.href = '/vendas/novo'" class="add column">
+            <i class="fas fa-poll"></i>
+            <div class="flex">
+                <i class="fas fa-plus"></i>
+                <b class="word">Nova Venda</b>
+            </div>
+        </div><div class="add column">
+            <i class="fab fa-product-hunt"></i>
+            <div class="flex">
+                <i class="fas fa-plus"></i>
+                <b class="word">Cadastrar Produto</b>
+            </div>
+        </div>  
+    </div>
+    <div class="line"></div>
+    <div class="container-search flex">
+        <div class="search">
+            <input type="text" placeholder="Cliente">
+            <i class="fas fa-search"></i>
+        </div>
+        <select name="filter" id="filter">
+            <option selected disabled value="Filtro">Filtro</option>
+            <option value="Produto">Produto</option>
+            <option value="Cliente">Cliente</option>
+        </select>
+    </div>
+    <ul id="dados">
+        <li class="flex">
+            <i class="fas fa-user"></i>
+            <p class="word">Thyago Odorico Garcia</p>
+            <i class="fas fa-angle-right"></i>
+        </li>
+        <li class="flex">
+            <i class="fas fa-user"></i>
+            <p class="word">Nayara Lorrane</p>
+            <i class="fas fa-angle-right"></i>
+        </li>
+        <li class="flex">
+            <i class="fas fa-user"></i>
+            <p class="word">Felippe Alves de Paula</p>
+            <i class="fas fa-angle-right"></i>
+        </li>
+        <li class="flex">
+            <i class="fas fa-user"></i>
+            <p class="word">Eduardo Mello Costa</p>
+            <i class="fas fa-angle-right"></i>
+        </li>
+        <li class="flex">
+            <i class="fas fa-user"></i>
+            <p class="word">John Lennon</p>
+            <i class="fas fa-angle-right"></i>
+        </li>
+    </ul>
+{% endblock %}

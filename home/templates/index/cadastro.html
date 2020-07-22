@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block link %} <link rel="stylesheet" href="{% static 'CSS/cadastro.css' %}"> {% endblock %}
+{% block title %} <title> CRUD - Cadastro de Cliente </title> {% endblock %}
+{% block content %}
+<form method="POST" class="container">
+    {% csrf_token %}
+    <h4 class="word">#Cadastro de Cliente</h4>
+    <i class="far fa-user col-2"></i>
+    <input name="nome" type="text" placeholder="Nome Completo" class="input col-2">
+    <input name='idade' type="text" placeholder="Idade" class="input">
+    <input name="sexo" type="text" placeholder="Sexo" class="input">
+    <input name="n_doc" type="text" placeholder="N do documento" class="input">
+    <input name="cep" type="text" placeholder="CEP" class="input">
+    <input name='endereco' type="text" placeholder="Endereço" class="input col-2">
+    <input name="bairro" type="text" placeholder="Bairro" class="input">
+    <input name='cid_est' type="text" placeholder="Cidade/Estado" class="input">
+    <button type="button" class='word' onclick="window.location.href = '/'">Cancelar</button>
+    <button class='word' type="submit">Salvar</button>
+</form>
+{% endblock %}

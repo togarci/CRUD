@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% block title %} {% endblock %}
+    <link rel="icon" type="imagem/png" href="{% static 'img/favicon.png' %}"/>
+    <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
+    <script src="https://kit.fontawesome.com/2eaa7bf3a1.js" crossorigin="anonymous"></script>
+    {% block link %} {% endblock %}
+    {% block script %} {% endblock %}
+</head>
+<body>
+    <header class="flex">
+        <img src="{% static 'img/favicon.png' %}">
+        <nav class="flex">
+            <ul class="flex">
+                <li onclick='window.location.href = "/"' class="word">Inicio</li>
+                <li onclick='window.location.href = "/vendas"' class="word">Vendas</li>
+                <li class="word">Relatorios</li>
+            </ul>
+        </nav>
+        <i class="fas fa-sign-out-alt"></i>
+        
+    </header>
+
+    <section>
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    <footer>
+        Thyago Odorico Garcia
+    </footer>
+</body>
+</html>
