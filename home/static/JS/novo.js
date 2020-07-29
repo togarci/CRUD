@@ -1,6 +1,4 @@
-var dataSale = {'Cod_Ven':'', 'Cod_Client':'', 'Cod_ProdVenda':1};
-var prodVenda = {'Cod_ProVenda':1};
-
+var prodVenda = new FormData();
 // Transinção de tela
 function passStep(number){
     
@@ -49,6 +47,11 @@ function selectUser(element){
     
     //Add no resumo
     document.querySelector('#cliente').innerHTML = '<p class="word"><i class="far fa-user"></i>'+ element.children[1].outerText +'</p>';
+
+    // Salvar no Form 
+    if(!prodVenda.get('cliente')){
+        prodVenda.append('cliente', '2')
+    }
 }
 
 // Selecao de Produto
@@ -88,3 +91,6 @@ function selectProduct(element, id){
     
     
 }
+
+
+

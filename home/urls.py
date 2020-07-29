@@ -5,4 +5,5 @@ urlpatterns = [
     path('cadastro/', views.addClient, name='addClient'), 
     path('vendas/', views.sales, name='sales'),
     path('vendas/novo', views.new, name='new'),
+    path('delete/cliente/<int:pk>', views.deleteCliente, name='delete'),
 ]

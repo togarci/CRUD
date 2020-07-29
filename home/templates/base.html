@@ -11,12 +11,13 @@
     <link rel="icon" type="imagem/png" href="{% static 'img/favicon.png' %}"/>
     <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
     <script src="https://kit.fontawesome.com/2eaa7bf3a1.js" crossorigin="anonymous"></script>
+    <script src="{% static 'JS/base.js' %}"></script>
     {% block link %} {% endblock %}
     {% block script %} {% endblock %}
 </head>
 <body>
     <header class="flex">
-        <img src="{% static 'img/favicon.png' %}">
+        <img id='logo' src="{% static 'img/favicon.png' %}">
         <nav class="flex">
             <ul class="flex">
                 <li onclick='window.location.href = "/"' class="word">Inicio</li>
@@ -36,5 +37,10 @@
     <footer>
         Thyago Odorico Garcia
     </footer>
+    <script>
+        document.querySelector("#logo").addEventListener('click', function(){
+            window.location.href = '/';
+        });
+    </script>
 </body>
 </html>

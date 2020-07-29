@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 # Create your models here.
 class Vendedor(models.Model):
     SEXO = (
@@ -21,11 +22,11 @@ class Cliente(models.Model):
         ("masculino", "masculino"),
         ("feminino", "feminino"),
     )
-
+    
     nome = models.CharField( max_length = 100 )
     idade = models.IntegerField()
-    sexo = models.CharField( max_length = 5 , choices=SEXO, )
-    n_doc = models.IntegerField()
+    sexo = models.CharField( max_length = 9 , choices=SEXO, )
+    n_doc = models.CharField( max_length = 14 )
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     
@@ -36,7 +37,8 @@ class Endereco(models.Model):
     cod_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     endereco = models.CharField( max_length = 150 )
     bairro = models.CharField( max_length = 100 )
-    cid_est = models.CharField( max_length = 200 )
+    cid = models.CharField( max_length = 100 )
+    est = models.CharField( max_length = 50 )
     cep = models.IntegerField()
 
     

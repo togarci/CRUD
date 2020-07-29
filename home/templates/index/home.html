@@ -2,6 +2,7 @@
 {% load static %}
 {% block link %} <link rel="stylesheet" href="{% static 'CSS/home.css' %}"> {% endblock %}
 {% block title %} <title>Crud - Home</title> {% endblock %}
+{% block script %} <script src="{% static 'JS/home.js' %}"></script> {% endblock %}
 {% block content%}
     <div class="add-div flex">
         <div class="add column" onclick="window.location.href = '/cadastro'">
@@ -26,42 +27,85 @@
         </div>  
     </div>
     <div class="line"></div>
-    <div class="container-search flex">
+
+    <!-- Campo de pesquisa -->
+    <form id='search' method="GET" class="container-search flex">
         <div class="search">
-            <input type="text" placeholder="Cliente">
-            <i class="fas fa-search"></i>
+            <input name="search" type="text" placeholder="Cliente">
+            <i class="fas fa-search" onclick="submit()"></i>
         </div>
-        <select name="filter" id="filter">
+        <select name="filter" id="filter" required>
             <option selected disabled value="Filtro">Filtro</option>
             <option value="Produto">Produto</option>
             <option value="Cliente">Cliente</option>
         </select>
-    </div>
+    </form>
+
+    <!-- dados de usuário -->
     <ul id="dados">
-        <li class="flex">
+
+        {% for x in users %}
+        <li class="flex" onclick="toggleModal({{ x.id }})">
             <i class="fas fa-user"></i>
-            <p class="word">Thyago Odorico Garcia</p>
+            <p class="word">{{ x.nome }}</p>
             <i class="fas fa-angle-right"></i>
         </li>
-        <li class="flex">
-            <i class="fas fa-user"></i>
-            <p class="word">Nayara Lorrane</p>
-            <i class="fas fa-angle-right"></i>
-        </li>
-        <li class="flex">
-            <i class="fas fa-user"></i>
-            <p class="word">Felippe Alves de Paula</p>
-            <i class="fas fa-angle-right"></i>
-        </li>
-        <li class="flex">
-            <i class="fas fa-user"></i>
-            <p class="word">Eduardo Mello Costa</p>
-            <i class="fas fa-angle-right"></i>
-        </li>
-        <li class="flex">
-            <i class="fas fa-user"></i>
-            <p class="word">John Lennon</p>
-            <i class="fas fa-angle-right"></i>
-        </li>
+        {% endfor %}
     </ul>
+
+
+    <!-- Modal -->
+    <div class="screen-modal close">
+        <div class="modal">
+            <i class="fas fa-times close" ></i>
+            <div class="middle flex">
+
+                <!-- Logo e icones -->
+                <div class="logo column">
+                    <i class="far fa-user"></i>
+                    <div  id="controls" class="flex">
+                        <button id="edit" onclick="edit()" class="word"><i class="fas fa-edit"></i> Editar</button>
+                        <i class="fas fa-trash" onclick="del()"></i>
+                    </div>
+                </div>
+    
+                <!-- Form -->
+                <form id='dadosEdit' method="POST" class="dados">
+                    {% csrf_token %}
+                    <input id='pk' type="text" name="pk" style="display: none;" >
+                    <input id="nome" disabled name="nome" type="text" placeholder="Nome Completo" class="input two-cols" >
+                    <input id='idade' disabled name='idade' type="text" placeholder="Idade" class="input">
+                    <input id="sexo" disabled name="sexo" type="text" placeholder="Sexo" class="input">
+                    <input id="n_doc" disabled name="n_doc" type="text" placeholder="N do documento" class="input">
+                    <input id="cep" disabled name="cep" type="text" placeholder="CEP" class="input">
+                    <input id="endereco" disabled name='endereco' type="text" placeholder="Endereço" class="input two-cols">
+                    <input id="bairro" disabled name="bairro" type="text" placeholder="Bairro" class="input">
+                    <div class="cid_est flex">
+                        <input id="cid" disabled name='cid' type="text" placeholder="Cidade" class="input">
+                        <input id="est" disabled name='est' type="text" placeholder="Estado" class="input">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Botoes -->
+            <div id="buttons" class="flex">
+                <button class="word close">Fechar</button>
+                <button onclick="document.querySelector('#dadosEdit').submit()" class="word">Concluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var data = `{{ json|safe }}`
+        var enderecos = `{{ enderecos|safe }}`
+        enderecos = enderecos.substring(2, enderecos.length -2);
+        enderecos = enderecos.split("'[").join("");
+        enderecos = enderecos.split("]'").join("");
+        // Conversao de string Json para JSON object
+        users = JSON.parse(data)
+        enderecos = JSON.parse(enderecos);
+
+        // token
+        var csrftoken = `{{ csrf_token }}`
+    </script>
 {% endblock %}
