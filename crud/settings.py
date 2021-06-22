@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'DB_crud',
-        'USER': 'CorpSys',
-        'PASSWORD': '123',
+        'USER': 'crudSys',
+        'PASSWORD': 'pass123',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }

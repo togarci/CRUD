@@ -79,13 +79,12 @@
 .model-dado{
     display: grid;
     grid-template-columns: 10% 50% 20% 20%;
-    height: 30px;
     width: 400px;
     align-items: center;
     background-color: #EFEFEF;
     border-radius: 15px;
     margin: 25px auto 0px auto;
-    padding: 0px 20px 0px 20px;
+    padding: 8px 20px 8px 20px;
     cursor: pointer;
 }
 .model-dado label{

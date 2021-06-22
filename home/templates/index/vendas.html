@@ -11,67 +11,66 @@
     <p class="word">Nova Venda</p>
 </div>
 
-<!-- Pesquisa -->
-<div class="search">
-    <input type="text" placeholder="Venda">
-    <i class="fas fa-search"></i>
-</div>
+
+<!-- Campo de pesquisa -->
+<form id='search' method="GET" class="container-search flex">
+    <div class="search">
+        <input name="search" type="text" placeholder="Cliente">
+        <i class="fas fa-search" onclick="document.querySelector('#search').submit()"></i>
+    </div>
+    <select name="filter" id="filter" >
+        <option selected value="cliente">Cliente</option>
+        <option value="codigo">Codigo de Venda</option>
+    </select>
+</form>
 
 <!-- Vendas -->
+{% if vendas %}
 <div class="legenda flex">
     <p class="word">Codigo da venda</p>
     <p class="word">Cliente</p>
     <p class="word"></p>
 </div>
+{% endif %}
 <div class="container-vendas">
     <ul>
-        <li onclick="alert('feijoada')">
-            <h4 class="word">1234</h4>
-            <p class="word">Thyago Odorico Garcia</p>
-            <div class="icons">
-                <i onclick='alert("teste")' class="fas fa-trash"></i>
-                <i class="fas fa-angle-right"></i>
-            </div>
-        </li>
+        {% for x in vendas %}
         <li>
-            <h4 class="word">1234</h4>
-            <p class="word">Thyago Odorico Garcia</p>
+            <h4 class="word"> {{ x.pk }} </h4>
+            <p class="word"> {{ x.cod_cliente.nome }} </p>
             <div class="icons">
-                <i class="fas fa-trash"></i>
-                <i class="fas fa-angle-right"></i>
+                <i onclick='window.location.href = "/venda/delete/{{ x.pk }}"' class="fas fa-trash"></i>
+                <i class="fas fa-edit" onclick="window.location.href = '/vendas/edit/{{ x.pk }}'"></i>
             </div>
         </li>
-        <li>
-            <h4 class="word">1234</h4>
-            <p class="word">Thyago Odorico Garcia</p>
-            <div class="icons">
-                <i class="fas fa-trash"></i>
-                <i class="fas fa-angle-right"></i>
-            </div>
-        </li>
-        <li>
-            <h4 class="word">1234</h4>
-            <p class="word">Thyago Odorico Garcia</p>
-            <div class="icons">
-                <i class="fas fa-trash"></i>
-                <i class="fas fa-angle-right"></i>
-            </div>
-        </li>
-        <li>
-            <h4 class="word">1234</h4>
-            <p class="word">Thyago Odorico Garcia</p>
-            <div class="icons">
-                <i class="fas fa-trash"></i>
-                <i class="fas fa-angle-right"></i>
-            </div>
-        </li>
+        {% endfor %}
+        
+       
     </ul>
 </div>
 
 
-<!-- <div class="screen-modal">
-    <div class="modal">
 
-    </div>
-</div> -->
+<!-- Paginacao -->
+{% if users.paginator.num_pages > 1 %}
+<div class="pagination">
+    <span class="step-links">
+        {% if users.has_previous %}
+            <a href="?page={{ tasks.previous_page_number }}"> <i class="fas fa-angle-left"></i> </a>
+        {% endif %}
+    
+        {% if users.paginator.num_pages %}
+            <span class="current word">
+              {{ users.number }} de {{ users.paginator.num_pages }}
+            </span>
+        {% endif %} 
+      
+        {% if users.has_next %}
+            <a href="?page={{ users.next_page_number }}"> <i class="fas fa-angle-right"></i></a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+
+
 {% endblock %}

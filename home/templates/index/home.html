@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block link %} <link rel="stylesheet" href="{% static 'CSS/home.css' %}"> {% endblock %}
-{% block title %} <title>Crud - Home</title> {% endblock %}
+{% block title %} <title>CRUD - Home</title> {% endblock %}
 {% block script %} <script src="{% static 'JS/home.js' %}"></script> {% endblock %}
 {% block content%}
     <div class="add-div flex">
-        <div class="add column" onclick="window.location.href = '/cadastro'">
+        <div class="add column" onclick="window.location.href = '/client/new'">
             <i class="fas fa-user-friends"></i>
             <div class="flex">
                 <i class="fas fa-plus"></i>
@@ -18,7 +18,8 @@
                 <i class="fas fa-plus"></i>
                 <b class="word">Nova Venda</b>
             </div>
-        </div><div class="add column">
+        </div>
+        <div onclick="window.location.href = '/produto/new'" class="add column">
             <i class="fab fa-product-hunt"></i>
             <div class="flex">
                 <i class="fas fa-plus"></i>
@@ -42,35 +43,79 @@
     </form>
 
     <!-- dados de usuário -->
+    {% if tipo == 'user' %}
     <ul id="dados">
-
         {% for x in users %}
-        <li class="flex" onclick="toggleModal({{ x.id }})">
+        <li class="flex" onclick="toggleModal('{{ x.id }}')">
             <i class="fas fa-user"></i>
             <p class="word">{{ x.nome }}</p>
             <i class="fas fa-angle-right"></i>
         </li>
         {% endfor %}
     </ul>
+    {% else %}
+    <ul id="dados">
+        {% for x in users %}
+        <li class="flex" onclick="toggleModal('{{ x.id }}')">
+            <i class="fab fa-product-hunt"></i>
+            <p class="word">{{ x.nome }}</p>
+            <i class="fas fa-angle-right"></i>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
+
+    <!-- Paginacao -->
+	{% if users.paginator.num_pages > 1 %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if users.has_previous %}
+                    {% if tipo == "user" %}
+                    <a href="?page={{ tasks.previous_page_number }}"> <i class="fas fa-angle-left"></i> </a>
+                    {% else %}
+                    <a href="?page={{ tasks.previous_page_number }}&search=&filter=Produto"> <i class="fas fa-angle-left"></i> </a>
+                    {% endif %}
+                {% endif %}
+            
+                {% if users.paginator.num_pages %}
+                    <span class="current word">
+                      {{ users.number }} de {{ users.paginator.num_pages }}
+                    </span>
+                {% endif %} 
+              
+                {% if users.has_next %}
+                    {% if tipo == "user" %}
+                    <a href="?page={{ users.next_page_number }}"> <i class="fas fa-angle-right"></i></a>
+                    {% else %}
+                    <a href="?page={{ users.next_page_number }}&search=&filter=Produto"> <i class="fas fa-angle-right"></i></a>
+                    {% endif %}
+                {% endif %}
+            </span>
+        </div>
+      {% endif %}
+
+    
 
     <!-- Modal -->
     <div class="screen-modal close">
         <div class="modal">
             <i class="fas fa-times close" ></i>
             <div class="middle flex">
+                {% if tipo == "user" %}
 
+                <!-- Cliente -->
                 <!-- Logo e icones -->
                 <div class="logo column">
                     <i class="far fa-user"></i>
                     <div  id="controls" class="flex">
                         <button id="edit" onclick="edit()" class="word"><i class="fas fa-edit"></i> Editar</button>
-                        <i class="fas fa-trash" onclick="del()"></i>
+                        <i class="fas fa-trash" onclick="delCli()"></i>
                     </div>
                 </div>
     
                 <!-- Form -->
-                <form id='dadosEdit' method="POST" class="dados">
+                <form id='dadosEdit' action="/client/edit" method="POST" class="dados">
                     {% csrf_token %}
                     <input id='pk' type="text" name="pk" style="display: none;" >
                     <input id="nome" disabled name="nome" type="text" placeholder="Nome Completo" class="input two-cols" >
@@ -85,7 +130,28 @@
                         <input id="est" disabled name='est' type="text" placeholder="Estado" class="input">
                     </div>
                 </form>
+
+            {% else %}
+
+            <!-- Produto -->
+            <!-- Logo e icones -->
+            <div class="logo column">
+                <i class="fab fa-product-hunt"></i>
+                <div  id="controls" class="flex">
+                    <button id="edit" onclick="edit()" class="word"><i class="fas fa-edit"></i> Editar</button>
+                    <i class="fas fa-trash" onclick="delPro()"></i>
+                </div>
             </div>
+            <!-- Form -->
+            <form action="/produto/edit" id="dadosEdit" method="POST" class="dados">
+                {% csrf_token %}
+                <input id='pk' type="text" name="pk" style="display: none;" >
+                <input id="nome" type="text" disabled placeholder="Nome" name="nome" class="input two-cols">
+                <input id="valor" type="number" disabled placeholder="Valor" name="valor" class="input two-cols">
+            </form>
+            {% endif %}
+        
+        </div>
 
             <!-- Botoes -->
             <div id="buttons" class="flex">

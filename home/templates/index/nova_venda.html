@@ -19,51 +19,49 @@
 
         <!-- Dados de Seleção -->
         <div class="container-dados flex">
+
+            <!-- Usuário -->
             <div class="dados column">
                 <div class="search">
-                    <input type="text" placeholder="Cliente">
+                    <input type="text" onkeyup="searchCli(this.value)" placeholder="Cliente">
                     <i class="fas fa-search"></i>
                 </div>
-                <div class="busca">
+                <div id='clientes' class="busca">
+                    {% for cliente in clientes %}
                     <div class="model-dado" onclick="selectUser(this)">
                         <i class="far fa-user"></i>
-                        <p class="word">Thyago Odorico Garcia</p>
+                        <p class="word"> {{ cliente.nome }} </p>
                     </div>
-                    <div class="model-dado" onclick="selectUser(this)">
-                        <i class="far fa-user"></i>
-                        <p class="word">Nayra Lorrane</p>
-                    </div>
+                   {% endfor %}
                 </div>
                 <div class="buttons flex">
                     <button onclick="passStep(0)" class="back">Voltar</button>
                     <button onclick="passStep(1)" class="next">Proximo</button>
                 </div>
             </div>
-            <div class="dados column">
+
+            <!-- Produto -->
+            <div  class="dados column">
                 <div class="search">
-                    <input type="text" placeholder="Produto">
+                    <input type="text" onkeyup="searchProd(this.value)" placeholder="Produto">
                     <i class="fas fa-search"></i>
                 </div>
-                <div class="busca">
-                    <div class="model-dado" onclick="selectProduct(this, 1)">
+                <div id='produtos' class="busca">
+                    {% for produto in produtos %}
+                    <div class="model-dado" onclick="selectProduct(this, {{ produto.pk }})">
                         <i class="fab fa-product-hunt"></i>
-                        <p class="word">Redmi Note 7</p>
+                        <p class="word"> {{ produto.nome }} </p>
                         <label class="word">Qtd: <input class="input-qtd" value="1" type="number" name="qtd" id="qtd"></label>
-                        <label class="word">Valor: <p class="word valor">500</p></label>
+                        <label class="word">Valor: <p class="word valor"> {{ produto.valor }} </p></label>
                     </div>
-                    <div  class="model-dado" onclick="selectProduct(this, 2)">
-                        <i class="fab fa-product-hunt"></i>
-                        <p class="word">Mi Note 10</p>
-                        <label class="word">Qtd: <input class="input-qtd" value="1" type="number" name="qtd" id="qtd"></label>
-                        <label class="word">Valor: <p class="word valor">1000</p></label>  
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="buttons flex">
                     <button onclick="passStep(0)" class="back">Voltar</button>
                     <button onclick="passStep(2)" class="next">Proximo</button>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
@@ -77,12 +75,12 @@
         </div>
         <h4 class="word tt_resumo">Cliente</h4>
         <div id='cliente' class="model-text flex">
-            
+
         </div>
 
         <h4 id='produto' class="word tt_resumo">Produtos</h4>
-     
-     
+
+
 
         <h4 class="word tt_resumo">Valor Total</h4>
         <div class="model-text flex">
@@ -94,7 +92,7 @@
             <button class="next">Concluir</button>
         </div>
     </div>
-    
+
 </div>
 
 {% endblock %}

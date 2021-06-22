@@ -19,13 +19,14 @@ function toggleModal(id){
                 }
             }
         }
-
-        // inserir dados de endereco do usuário da id da modal 
-        for(var x = 0; x < enderecos.length; x++){
-            if(enderecos[x].fields.cod_cliente == id){
-                for(y in enderecos[x].fields){
-                    if(!y.match('cod_cliente'))
-                        document.getElementById(y).value = enderecos[x].fields[y];
+        if(users[0].model == 'home.cliente'){
+            // inserir dados de endereco do usuário da id da modal 
+            for(var x = 0; x < enderecos.length; x++){
+                if(enderecos[x].fields.cod_cliente == id){
+                    for(y in enderecos[x].fields){
+                        if(!y.match('cod_cliente'))
+                            document.getElementById(y).value = enderecos[x].fields[y];
+                    }
                 }
             }
         }
@@ -39,6 +40,7 @@ function toggleModal(id){
         document.querySelector('.screen-modal').style.display = 'flex';       
     }
 }
+
 
 window.onload = function(){
     window.addEventListener('click', function(e){
@@ -69,9 +71,14 @@ function edit(){
         flagEdit = true;
     }
 }
-function del(){
-    var str = '/delete/cliente/' + document.getElementById('pk').value;
+function delCli(){
+    var str = '/client/delete/' + document.getElementById('pk').value;
     window.location.href = str;
+}
+
+function delPro(){
+    var str = '/produto/delete/' + document.getElementById('pk').value;
+    window.location.href = str
 }
 
 var teste;

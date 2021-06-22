@@ -11,7 +11,7 @@ class Vendedor(models.Model):
 
     nome = models.CharField( max_length = 100 )
     idade = models.IntegerField()
-    sexo = models.CharField( max_length = 5 , choices=SEXO, )
+    sexo = models.CharField( max_length = 9 , choices=SEXO )
     n_doc = models.IntegerField()
     
     def __str__(self):
@@ -59,6 +59,8 @@ class Venda(models.Model):
     cod_cliente = models.ForeignKey(Cliente, on_delete=models.DO_NOTHING)
     valorTotal = models.IntegerField()
 
+    def __str__(self):
+        return str(self.id )
 class Prod_Venda(models.Model):
     cod_venda = models.ForeignKey(Venda, on_delete=models.CASCADE)
     cod_produto = models.ForeignKey(Produto, on_delete=models.DO_NOTHING)
