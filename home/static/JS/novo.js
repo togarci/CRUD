@@ -63,7 +63,7 @@ function selectUser(element){
 // Selecao de Produto
 valorTotal = 0;
 function selectProduct(element, id){
-    var valor = parseInt(element.children[3].children[0].outerText);
+    var valor = parseInt(element.children[2].children[0].outerText);
     var qtd = element.children[2].children[0].value
 
     if(element.className.match('mark') ){

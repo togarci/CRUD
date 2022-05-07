@@ -4,6 +4,8 @@
 {% block title %} <title>CRUD - Home</title> {% endblock %}
 {% block script %} <script src="{% static 'JS/home.js' %}"></script> {% endblock %}
 {% block content%}
+
+    <!-- Botoes -->
     <div class="add-div flex">
         <div class="add column" onclick="window.location.href = '/client/new'">
             <i class="fas fa-user-friends"></i>
@@ -25,7 +27,7 @@
                 <i class="fas fa-plus"></i>
                 <b class="word">Cadastrar Produto</b>
             </div>
-        </div>  
+        </div>
     </div>
     <div class="line"></div>
 
@@ -46,20 +48,26 @@
     {% if tipo == 'user' %}
     <ul id="dados">
         {% for x in users %}
-        <li class="flex" onclick="toggleModal('{{ x.id }}')">
+        <li class="flex">
             <i class="fas fa-user"></i>
             <p class="word">{{ x.nome }}</p>
-            <i class="fas fa-angle-right"></i>
+            <div class="flex">
+                <i class="fas fa-edit" onclick="toggleModal('{{ x.id }}')"></i>
+                <i class="fas fa-trash" onclick="toggleModal('{{ x.id }}', true)"></i>
+            </div>
         </li>
         {% endfor %}
     </ul>
     {% else %}
     <ul id="dados">
         {% for x in users %}
-        <li class="flex" onclick="toggleModal('{{ x.id }}')">
+        <li class="flex">
             <i class="fab fa-product-hunt"></i>
             <p class="word">{{ x.nome }}</p>
-            <i class="fas fa-angle-right"></i>
+            <div class="flex">
+                <i class="fas fa-edit" onclick="toggleModal('{{ x.id }}')"></i>
+                <i class="fas fa-trash" onclick="toggleModal('{{ x.id }}', true)"></i>
+            </div>
         </li>
         {% endfor %}
     </ul>
@@ -77,13 +85,13 @@
                     <a href="?page={{ tasks.previous_page_number }}&search=&filter=Produto"> <i class="fas fa-angle-left"></i> </a>
                     {% endif %}
                 {% endif %}
-            
+
                 {% if users.paginator.num_pages %}
                     <span class="current word">
                       {{ users.number }} de {{ users.paginator.num_pages }}
                     </span>
-                {% endif %} 
-              
+                {% endif %}
+
                 {% if users.has_next %}
                     {% if tipo == "user" %}
                     <a href="?page={{ users.next_page_number }}"> <i class="fas fa-angle-right"></i></a>
@@ -95,71 +103,60 @@
         </div>
       {% endif %}
 
-    
-
     <!-- Modal -->
     <div class="screen-modal close">
         <div class="modal">
             <i class="fas fa-times close" ></i>
             <div class="middle flex">
                 {% if tipo == "user" %}
-
-                <!-- Cliente -->
-                <!-- Logo e icones -->
-                <div class="logo column">
-                    <i class="far fa-user"></i>
-                    <div  id="controls" class="flex">
-                        <button id="edit" onclick="edit()" class="word"><i class="fas fa-edit"></i> Editar</button>
-                        <i class="fas fa-trash" onclick="delCli()"></i>
-                    </div>
-                </div>
-    
                 <!-- Form -->
                 <form id='dadosEdit' action="/client/edit" method="POST" class="dados">
                     {% csrf_token %}
                     <input id='pk' type="text" name="pk" style="display: none;" >
-                    <input id="nome" disabled name="nome" type="text" placeholder="Nome Completo" class="input two-cols" >
-                    <input id='idade' disabled name='idade' type="text" placeholder="Idade" class="input">
-                    <input id="sexo" disabled name="sexo" type="text" placeholder="Sexo" class="input">
-                    <input id="n_doc" disabled name="n_doc" type="text" placeholder="N do documento" class="input">
-                    <input id="cep" disabled name="cep" type="text" placeholder="CEP" class="input">
-                    <input id="endereco" disabled name='endereco' type="text" placeholder="Endereço" class="input two-cols">
-                    <input id="bairro" disabled name="bairro" type="text" placeholder="Bairro" class="input">
+                    <input id="nome" name="nome" type="text" placeholder="Nome Completo" class="input two-cols" >
+                    <input id='idade' name='idade' type="text" placeholder="Idade" class="input">
+                    <input id="sexo" name="sexo" type="text" placeholder="Sexo" class="input">
+                    <input id="n_doc" name="n_doc" type="text" placeholder="N do documento" class="input">
+                    <input id="cep" name="cep" type="text" placeholder="CEP" class="input">
+                    <input id="endereco" name='endereco' type="text" placeholder="Endereço" class="input two-cols">
+                    <input id="bairro" name="bairro" type="text" placeholder="Bairro" class="input">
                     <div class="cid_est flex">
-                        <input id="cid" disabled name='cid' type="text" placeholder="Cidade" class="input">
-                        <input id="est" disabled name='est' type="text" placeholder="Estado" class="input">
+                        <input id="cid" name='cid' type="text" placeholder="Cidade" class="input">
+                        <input id="est" name='est' type="text" placeholder="Estado" class="input">
                     </div>
                 </form>
 
-            {% else %}
-
-            <!-- Produto -->
-            <!-- Logo e icones -->
-            <div class="logo column">
-                <i class="fab fa-product-hunt"></i>
-                <div  id="controls" class="flex">
-                    <button id="edit" onclick="edit()" class="word"><i class="fas fa-edit"></i> Editar</button>
-                    <i class="fas fa-trash" onclick="delPro()"></i>
-                </div>
+                {% elif tipo == "product" %}
+                <!-- Form -->
+                <form action="/produto/edit" id="dadosEdit" method="POST" class="dados">
+                    {% csrf_token %}
+                    <input id='pk' type="text" name="pk" style="display: none;" >
+                    <input id="nome" type="text" placeholder="Nome" name="nome" class="input two-cols">
+                    <input id="valor" type="text" placeholder="Valor" name="valor" onchange="convertToMoneyValue(this)" class="input two-cols">
+                </form>               
+                {% endif %}
             </div>
-            <!-- Form -->
-            <form action="/produto/edit" id="dadosEdit" method="POST" class="dados">
-                {% csrf_token %}
-                <input id='pk' type="text" name="pk" style="display: none;" >
-                <input id="nome" type="text" disabled placeholder="Nome" name="nome" class="input two-cols">
-                <input id="valor" type="number" disabled placeholder="Valor" name="valor" class="input two-cols">
-            </form>
-            {% endif %}
-        
-        </div>
-
             <!-- Botoes -->
             <div id="buttons" class="flex">
-                <button class="word close">Fechar</button>
-                <button onclick="document.querySelector('#dadosEdit').submit()" class="word">Concluir</button>
+                <input id='pk' type="text" name="pk" style="display: none;" >
+                <button onclick="document.querySelector('#dadosEdit').submit()" class="word">Concluir</button>                
             </div>
         </div>
     </div>
+
+    <div class="screen-modal close">
+        <div class="modal-delete">
+            <i class="fas fa-times close" ></i>
+            <div class="middle flex">
+                <h3 class="word">Deseja excluir este item ?</h3>
+            </div>
+            <div id="buttons" class="flex">
+                <button class="word close">Cancelar</button>
+                <button onclick="delCli()" class="word">Excluir</button>
+            </div>
+        </div>
+    </div>
+    
 
     <script>
         var data = `{{ json|safe }}`

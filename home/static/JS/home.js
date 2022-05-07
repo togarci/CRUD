@@ -1,14 +1,27 @@
+var idDelete = null;
+
+
 function submit(){
     document.querySelector('#search').submit();
 }
 
-function toggleModal(id){
-    if(document.querySelector('.screen-modal').style.display == 'flex'){
-        // sumir com a modal e voltar scroll da pagina
-        document.querySelector('.screen-modal').style.display = 'none';
-        document.body.style.overflowY = 'auto';
+function showModal(deleteModal) {
+    // scroll da pagina e posicionamento da modal
+    var valueScroll = window.scrollY + 'px';
+    modal = deleteModal 
+        ? document.querySelectorAll('.screen-modal')[1]
+        : document.querySelectorAll('.screen-modal')[0];
+        
+    modal.style.top = valueScroll;
+    document.body.style.overflowY = 'hidden';
 
-    } else if(id) {
+    // Fazer modal visivel
+    modal.style.display = 'flex';
+}
+
+
+function toggleModal(id, deleteModal){
+    if(id && !deleteModal) {
         // inserir dados do usuário da id na modal
         for(var x = 0; x != users.length; x++){
             if(users[x].pk == id){
@@ -20,7 +33,7 @@ function toggleModal(id){
             }
         }
         if(users[0].model == 'home.cliente'){
-            // inserir dados de endereco do usuário da id da modal 
+            // inserir dados de endereco do usuário da id da modal
             for(var x = 0; x < enderecos.length; x++){
                 if(enderecos[x].fields.cod_cliente == id){
                     for(y in enderecos[x].fields){
@@ -31,13 +44,17 @@ function toggleModal(id){
             }
         }
 
-        // scroll da pagina e posicionamento da modal
-        var valueScroll = window.scrollY + 'px';
-        document.querySelector('.screen-modal').style.top = valueScroll;
-        document.body.style.overflowY = 'hidden';
-
-        // Fazer modal visivel
-        document.querySelector('.screen-modal').style.display = 'flex';       
+        showModal();
+    } else {
+        let modal = document.querySelectorAll('.screen-modal');
+        if ((modal[0].style.display === 'flex') || (modal[1].style.display === 'flex')) {
+            modal[0].style.display = 'none';
+            modal[1].style.display = 'none';
+            document.body.style.overflowY = 'auto';
+        } else {
+            showModal(deleteModal);
+            if (id) document.querySelector('#pk').value = id;
+        }
     }
 }
 
@@ -79,20 +96,4 @@ function delCli(){
 function delPro(){
     var str = '/produto/delete/' + document.getElementById('pk').value;
     window.location.href = str
-}
-
-var teste;
-function teste(){
-    fetch("https://viacep.com.br/ws/12323420/json/?callback=meu_callback", {
-        method: "GET",
-    })
-    .then(function(response) { 
-        // response.JSON()
-        response.text()
-        .then(function(result){ 
-          teste = result;
-        })
-      })
-    .catch(function(err) { console.error(err); })
-     
 }

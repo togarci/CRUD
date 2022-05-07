@@ -26,7 +26,6 @@
             </ul>
         </nav>
         <i class="fas fa-sign-out-alt"></i>
-        
     </header>
 
     <section>
@@ -34,8 +33,27 @@
         {% endblock %}
     </section>
 
-    <footer>
-        Thyago Odorico Garcia
+    <footer class="flex">
+        <div class="column">
+            <p class="word">
+                Thyago O. Garcia &reg
+            </p>
+            <a href="https://www.linkedin.com/in/thyago-odorico-10ab8a11a/" class="word">
+                <i class="fab fa-linkedin"></i>
+                LinkedIn
+            </a>
+            <a href="https://github.com/togarci" class="word">
+                <i class="fab fa-github"></i>
+                Github
+            </a>
+        </div>
+        <div class="column">
+            <a href="https://github.com/togarci/CRUD" class="word">
+                <i class="fab fa-dev"></i>
+                Projeto
+            </a>
+        </div>
+        <div class="column"></div>
     </footer>
     <script>
         document.querySelector("#logo").addEventListener('click', function(){

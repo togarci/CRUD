@@ -4,14 +4,16 @@
 {% block script %} <script src="{% static 'JS/cadastro.js' %}"></script> {% endblock %}
 {% block title %} <title> CRUD - Cadastro de Produto </title> {% endblock %}
 {% block content %}
-<form method="POST" id="form" class="container">
-    {% csrf_token %}
-    <h4 class="word">#Cadastro de Produto</h4>
-    <i class="fab fa-product-hunt col-2"></i>
-    <input name="nome" type="text" placeholder="Nome " class="input" required>
-    <input name='valor' type="number" placeholder="Valor" class="input" required>
- 
-    <button type="button" class='word' onclick="window.location.href = '/'">Cancelar</button>
-    <button class='word' type="submit" >Salvar</button>
-</form>
+<div class="flex content">
+    <form method="POST" id="form" class="container produto">
+        {% csrf_token %}
+        <h4 class="word">#Cadastro de Produto</h4>
+        <i class="fab fa-product-hunt col-2"></i>
+        <input name="nome" type="text" placeholder="Nome " class="input" required>
+        <input name='valor' type="text" placeholder="Valor" class="input" onchange="convertToMoneyValue(this)" required>
+     
+        <button type="button" class='word' onclick="window.location.href = '/'">Cancelar</button>
+        <button class='word' type="submit" >Salvar</button>
+    </form>
+</div>
 {% endblock %}

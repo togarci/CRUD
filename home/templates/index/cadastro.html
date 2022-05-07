@@ -4,28 +4,30 @@
 {% block script %} <script src="{% static 'JS/cadastro.js' %}"></script> {% endblock %}
 {% block title %} <title> CRUD - Cadastro de Cliente </title> {% endblock %}
 {% block content %}
-<form method="POST" id="form" class="container">
-    {% csrf_token %}
-    <h4 class="word">#Cadastro de Cliente</h4>
-    <i class="far fa-user col-2"></i>
-    <input name="nome" type="text" placeholder="Nome Completo" class="input col-2" required>
-    <input name='idade' type="text" placeholder="Idade" class="input" maxlength="2" required>
-    <select name="sexo" class="input" id="sexo" required>
-        <option value="" disabled selected class="word">Sexo</option>
-        <option value="masculino" class="word">Masculino</option>
-        <option value="feminino" class="word">Feminino</option>
-    </select>
+<div class="content flex">
+    <form method="POST" id="form" class="container cliente">
+        {% csrf_token %}
+        <h4 class="word">#Cadastro de Cliente</h4>
+        <i class="far fa-user col-2"></i>
+        <input name="nome" type="text" placeholder="Nome Completo" class="input col-2" required>
+        <input name='idade' type="text" placeholder="Idade" class="input" maxlength="2" required>
+        <select name="sexo" class="input" id="sexo" required>
+            <option value="" disabled selected class="word">Sexo</option>
+            <option value="masculino" class="word">Masculino</option>
+            <option value="feminino" class="word">Feminino</option>
+        </select>
+        
+        <input id='n_doc' name="n_doc" type="text" placeholder="CPF" class="input" onkeypress="formatar('###.###.###-##', this)" maxlength="14" required>
+        <input id="cep" onchange="pesquisarCep(this.value)" name="cep" type="text" placeholder="CEP" class="input" onkeypress="formatar('##.###-###', this)" maxlength="10" required>
+        <input id="endereco" name='endereco' type="text" placeholder="Endereço" class="input col-2" required>
+        <input id="bairro" name="bairro" type="text" placeholder="Bairro" class="input" required>
+        <div class="cid_est flex">
+            <input id="cid" name='cid' type="text" placeholder="Cidade" class="input" required>
+            <input id="est" name='est' type="text" placeholder="Estado" class="input" required>
+        </div>
     
-    <input id='n_doc' name="n_doc" type="text" placeholder="CPF" class="input" onkeypress="formatar('###.###.###-##', this)" maxlength="14" required>
-    <input id="cep" onchange="pesquisarCep(this.value)" name="cep" type="text" placeholder="CEP" class="input" onkeypress="formatar('##.###-###', this)" maxlength="10" required>
-    <input id="endereco" name='endereco' type="text" placeholder="Endereço" class="input col-2" required>
-    <input id="bairro" name="bairro" type="text" placeholder="Bairro" class="input" required>
-    <div class="cid_est flex">
-        <input id="cid" name='cid' type="text" placeholder="Cidade" class="input" required>
-        <input id="est" name='est' type="text" placeholder="Estado" class="input" required>
-    </div>
-
-    <button type="button" class='word' onclick="window.location.href = '/'">Cancelar</button>
-    <button class='word' type="button" onclick="Submit()">Salvar</button>
-</form>
+        <button type="button" class='word' onclick="window.location.href = '/'">Cancelar</button>
+        <button class='word' type="button" onclick="Submit()">Salvar</button>
+    </form>
+</div>
 {% endblock %}

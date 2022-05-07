@@ -28,7 +28,7 @@
                 </div>
                 <div id='clientes' class="busca">
                     {% for cliente in clientes %}
-                    <div class="model-dado" onclick="selectUser(this)">
+                    <div class="model-dado dado-cliente" onclick="selectUser(this)">
                         <i class="far fa-user"></i>
                         <p class="word"> {{ cliente.nome }} </p>
                     </div>
@@ -48,11 +48,16 @@
                 </div>
                 <div id='produtos' class="busca">
                     {% for produto in produtos %}
-                    <div class="model-dado" onclick="selectProduct(this, {{ produto.pk }})">
-                        <i class="fab fa-product-hunt"></i>
-                        <p class="word"> {{ produto.nome }} </p>
-                        <label class="word">Qtd: <input class="input-qtd" value="1" type="number" name="qtd" id="qtd"></label>
-                        <label class="word">Valor: <p class="word valor"> {{ produto.valor }} </p></label>
+                    <div class="flex">
+                        <div class="model-dado dado-produto" onclick="selectProduct(this, '{{ produto.pk }}')">
+                            <i class="fab fa-product-hunt"></i>
+                            <p class="word"> {{ produto.nome }} </p>
+                            <label class="word">Valor: <p class="word valor"> {{ produto.valor }} </p></label>
+                        </div>
+                        <div class="model-dado dado-qtde">
+                            <label class="word">Qtd: <input class="input-qtd" value="1" type="number" name="qtd" id="qtd"></label>
+                        </div>
+
                     </div>
                     {% endfor %}
                 </div>

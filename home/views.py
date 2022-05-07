@@ -15,11 +15,6 @@ from .forms import ClientForm, EnderecoForm, ProductForm
 from django.core.paginator import Paginator
 
 
-
-
-
-
-
 # Create your views here.
 
 # view da tela inicial
